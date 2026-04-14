@@ -18,7 +18,7 @@ tests_require = [
 ]
 
 setup(
-    name="django-nine",
+    name="django-nine-v2",
     version=version,
     description="Version checking library.",
     long_description="{0}".format(readme),
@@ -45,15 +45,17 @@ setup(
         "Development Status :: 5 - Production/Stable",
     ],
     project_urls={
-        "Bug Tracker": "https://github.com/barseghyanartur/django-nine/issues",
-        "Documentation": "https://django-nine.readthedocs.io/",
-        "Source Code": "https://github.com/barseghyanartur/django-nine",
-        "Changelog": "https://django-nine.readthedocs.io/" "en/latest/changelog.html",
+        "Bug Tracker": "https://github.com/JahanzebNawaz/django-nine-v2/issues",
+        "Documentation": "https://github.com/JahanzebNawaz/django-nine-v2#readme",
+        "Source Code": "https://github.com/JahanzebNawaz/django-nine-v2",
+        "Changelog": "https://github.com/JahanzebNawaz/django-nine-v2/blob/main/CHANGELOG.rst",
     },
     keywords="django, compatibility",
     author="Artur Barseghyan",
     author_email="artur.barseghyan@gmail.com",
-    url="https://github.com/barseghyanartur/django-nine/",
+    maintainer="Jahanzeb Nawaz",
+    maintainer_email="mr.njahanzeb@gmail.com",
+    url="https://github.com/JahanzebNawaz/django-nine-v2/",
     package_dir={"": "src"},
     packages=find_packages(where="./src"),
     license="GPL-2.0-only OR LGPL-2.1-or-later",

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# django-nine documentation build configuration file, created by
+# django-nine-v2 documentation build configuration file, created by
 # sphinx-quickstart on Wed Oct 30 01:14:35 2013.
 #
 # This file is execfile()d with the current directory set to its
@@ -23,14 +23,14 @@ sys.path.insert(0, os.path.abspath('../src'))
 sys.path.insert(0, os.path.abspath('../examples'))
 sys.path.insert(0, os.path.abspath('../examples/example'))
 try:
-    import nine
-    version = nine.__version__
-    project = nine.__title__
-    copyright = nine.__copyright__
+    import django_nine
+    version = django_nine.__version__
+    project = u'django-nine-v2'
+    copyright = u'2015-2026, Jahanzeb Nawaz <mr.njahanzeb@gmail.com>'
 except Exception as e:
     version = '0.1'
-    project = u'django-nine'
-    copyright = u'2015, Artur Barseghyan <artur.barseghyan@gmail.com>'
+    project = u'django-nine-v2'
+    copyright = u'2015-2026, Jahanzeb Nawaz <mr.njahanzeb@gmail.com>'
 
 # -- General configuration ------------------------------------------------
 
@@ -58,8 +58,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-#project = u'django-nine'
-#copyright = u'2015, Artur Barseghyan <artur.barseghyan@gmail.com>'
+#project = u'django-nine-v2'
+#copyright = u'2015-2026, Jahanzeb Nawaz <mr.njahanzeb@gmail.com>'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -192,7 +192,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'django-ninedoc'
+htmlhelp_basename = 'django-nine-v2doc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -212,8 +212,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'django-nine.tex', u'django-nineDocumentation',
-   u'Artur Barseghyan \\textless{}artur.barseghyan@gmail.com\\textgreater{}', 'manual'),
+  ('index', 'django-nine-v2.tex', u'django-nine-v2 Documentation',
+   u'Jahanzeb Nawaz \textless{}mr.njahanzeb@gmail.com\textgreater{}', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -242,8 +242,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'django-nine', u'django-nine Documentation',
-     [u'Artur Barseghyan <artur.barseghyan@gmail.com>'], 1)
+    ('index', 'django-nine-v2', u'django-nine-v2 Documentation',
+     [u'Jahanzeb Nawaz <mr.njahanzeb@gmail.com>'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -256,8 +256,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'django-nine', u'django-nine Documentation',
-   u'Artur Barseghyan <artur.barseghyan@gmail.com>', 'django-nine', 'Compatibility library for Django.',
+  ('index', 'django-nine-v2', u'django-nine-v2 Documentation',
+   u'Jahanzeb Nawaz <mr.njahanzeb@gmail.com>', 'django-nine-v2', 'Compatibility library for Django.',
    'Miscellaneous'),
 ]
 
@@ -277,10 +277,10 @@ texinfo_documents = [
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'django-nine'
-epub_author = u'Artur Barseghyan <artur.barseghyan@gmail.com>'
-epub_publisher = u'Artur Barseghyan <artur.barseghyan@gmail.com>'
-epub_copyright = u'2015, Artur Barseghyan <artur.barseghyan@gmail.com>'
+epub_title = u'django-nine-v2'
+epub_author = u'Jahanzeb Nawaz <mr.njahanzeb@gmail.com>'
+epub_publisher = u'Jahanzeb Nawaz <mr.njahanzeb@gmail.com>'
+epub_copyright = u'2015-2026, Jahanzeb Nawaz <mr.njahanzeb@gmail.com>'
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = u'django-nine'

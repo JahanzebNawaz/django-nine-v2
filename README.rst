@@ -1,42 +1,41 @@
-===========
-django-nine
-===========
-`django-nine` - version checking library for Django.
+====================
+django-nine-v2
+====================
+`django-nine-v2` - version checking library for Django.
 
-.. image:: https://img.shields.io/pypi/v/django-nine.svg
-   :target: https://pypi.python.org/pypi/django-nine
+.. image:: https://img.shields.io/pypi/v/django-nine-v2.svg
+   :target: https://pypi.python.org/pypi/django-nine-v2
    :alt: PyPI Version
 
-.. image:: https://img.shields.io/pypi/pyversions/django-nine.svg
-    :target: https://pypi.python.org/pypi/django-nine/
+.. image:: https://img.shields.io/pypi/pyversions/django-nine-v2.svg
+    :target: https://pypi.python.org/pypi/django-nine-v2/
     :alt: Supported Python versions
 
-.. image:: https://github.com/barseghyanartur/django-nine/actions/workflows/test.yml/badge.svg
-   :target: https://github.com/barseghyanartur/django-nine/actions/workflows/test.yml
+.. image:: https://github.com/JahanzebNawaz/django-nine-v2/actions/workflows/test.yml/badge.svg
+   :target: https://github.com/JahanzebNawaz/django-nine-v2/actions/workflows/test.yml
    :alt: Build Status
 
-.. image:: https://readthedocs.org/projects/django-nine/badge/?version=latest
-    :target: http://django-nine.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/django-nine-v2/badge/?version=latest
+    :target: https://django-nine-v2.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
 .. image:: https://img.shields.io/badge/license-GPL--2.0--only%20OR%20LGPL--2.1--or--later-blue.svg
-   :target: https://github.com/barseghyanartur/django-nine/#License
+   :target: https://github.com/JahanzebNawaz/django-nine-v2/#License
    :alt: GPL-2.0-only OR LGPL-2.1-or-later
 
-.. image:: https://coveralls.io/repos/github/barseghyanartur/django-nine/badge.svg?branch=master
-    :target: https://coveralls.io/github/barseghyanartur/django-nine?branch=master
+.. image:: https://coveralls.io/repos/github/JahanzebNawaz/django-nine-v2/badge.svg?branch=master
+    :target: https://coveralls.io/github/JahanzebNawaz/django-nine-v2?branch=master
     :alt: Coverage
 
 Prerequisites
 =============
-- Python 3.7, 3.8, 3.9 and 3.10.
-- Django 1.5, 1.6, 1.7, 1.8, 1.9, 1.10, 1.11, 2.0, 2.1, 2.2, 3.0, 3.1, 3.2,
-  4.0 and 4.1.
+- Python 3.7, 3.8, 3.9, 3.10. 3.11, 3.12, 3.13 
+- Django 1.5, 1.6, 1.7, 1.8, 1.9, 1.10, 1.11, 2.0, 2.1, 2.2, 3.0, 3.1, 3.2, 4.0, 4.1, 4.2, 5.0, 5.1, and 5.2
 
 Documentation
 =============
 Documentation is available on `Read the Docs
-<http://django-nine.readthedocs.io/>`_.
+<https://django-nine-v2.readthedocs.io/>`_.
 
 Installation
 ============
@@ -44,13 +43,13 @@ Install latest stable version from PyPI:
 
 .. code-block:: sh
 
-    pip install django-nine
+    pip install django-nine-v2
 
 Or latest stable version from GitHub:
 
 .. code-block:: sh
 
-    pip install https://github.com/barseghyanartur/django-nine/archive/stable.zip
+    pip install git+https://github.com/JahanzebNawaz/django-nine-v2.git
 
 Usage
 =====
@@ -122,8 +121,8 @@ GPL-2.0-only OR LGPL-2.1-or-later
 Support
 =======
 For any security issues contact me at the e-mail given in the `Author`_ section.
-For overall issues, go to `GitHub <https://github.com/barseghyanartur/django-nine/issues>`_.
+For overall issues, go to `GitHub <https://github.com/JahanzebNawaz/django-nine-v2/issues>`_.
 
 Author
 ======
-Artur Barseghyan <artur.barseghyan@gmail.com>
+Jahanzeb Nawaz <mr.njahanzeb@gmail.com>
