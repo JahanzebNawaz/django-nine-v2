@@ -27,8 +27,8 @@ else:
         from django.apps import apps
 
         try:
-            User = apps.get_registered_model(user_app_name, user_model_name)
-        except KeyError:
+            User = apps.get_model(user_app_name, user_model_name)
+        except (LookupError, KeyError):
             pass
 
     if User is None:

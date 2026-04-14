@@ -57,7 +57,7 @@ for v in LOOSE_VERSIONS:
     __all__.append(var_name)
 
 # Exact versions
-EXACT_VERSIONS = LOOSE_VERSIONS[:-1]
+EXACT_VERSIONS = LOOSE_VERSIONS
 
 for i, v in enumerate(EXACT_VERSIONS):
     l_cur = Version(v)
