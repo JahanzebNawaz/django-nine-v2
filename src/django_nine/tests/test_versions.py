@@ -1,15 +1,6 @@
 import unittest
-import mock
-
-# For Python3 >= 3.4
-try:
-    from importlib import reload
-# For Python3 < 3.4
-except ImportError as err:
-    try:
-        from imp import reload
-    except ImportError as err:
-        pass
+from importlib import reload
+from unittest import mock
 
 from .base import log_info
 
@@ -493,7 +484,80 @@ class VersionsTest(unittest.TestCase):
         self.assertTrue(versions.DJANGO_GTE_2_1)
         self.assertTrue(versions.DJANGO_GTE_2_2)
         self.assertTrue(versions.DJANGO_GTE_3_0)
+    @log_info
+    @mock.patch("django.get_version", mock.MagicMock(return_value="4.2"))
+    def test_django_4_2(self):
+        """
+        Tests as if we were using Django==4.2.
+        """
+        from django_nine import versions
 
+        reload(versions)
+
+        self.assertFalse(versions.DJANGO_3_2)
+        self.assertFalse(versions.DJANGO_4_0)
+        self.assertFalse(versions.DJANGO_4_1)
+        self.assertTrue(versions.DJANGO_4_2)
+        self.assertFalse(versions.DJANGO_5_0)
+
+        self.assertFalse(versions.DJANGO_LTE_3_2)
+        self.assertFalse(versions.DJANGO_LTE_4_0)
+        self.assertFalse(versions.DJANGO_LTE_4_1)
+        self.assertTrue(versions.DJANGO_LTE_4_2)
+        self.assertTrue(versions.DJANGO_LTE_5_0)
+
+        self.assertTrue(versions.DJANGO_GTE_3_2)
+        self.assertTrue(versions.DJANGO_GTE_4_0)
+        self.assertTrue(versions.DJANGO_GTE_4_1)
+        self.assertTrue(versions.DJANGO_GTE_4_2)
+        self.assertFalse(versions.DJANGO_GTE_5_0)
+
+    @log_info
+    @mock.patch("django.get_version", mock.MagicMock(return_value="5.0"))
+    def test_django_5_0(self):
+        """
+        Tests as if we were using Django==5.0.
+        """
+        from django_nine import versions
+
+        reload(versions)
+
+        self.assertFalse(versions.DJANGO_4_2)
+        self.assertTrue(versions.DJANGO_5_0)
+        self.assertFalse(versions.DJANGO_5_1)
+
+        self.assertFalse(versions.DJANGO_LTE_4_2)
+        self.assertTrue(versions.DJANGO_LTE_5_0)
+        self.assertTrue(versions.DJANGO_LTE_5_1)
+
+        self.assertTrue(versions.DJANGO_GTE_4_2)
+        self.assertTrue(versions.DJANGO_GTE_5_0)
+        self.assertFalse(versions.DJANGO_GTE_5_1)
+
+    @log_info
+    @mock.patch("django.get_version", mock.MagicMock(return_value="6.2"))
+    def test_django_6_2(self):
+        """
+        Tests as if we were using Django==6.2.
+        """
+        from django_nine import versions
+
+        reload(versions)
+
+        self.assertFalse(versions.DJANGO_5_2)
+        self.assertFalse(versions.DJANGO_6_0)
+        self.assertFalse(versions.DJANGO_6_1)
+        self.assertTrue(versions.DJANGO_6_2)
+
+        self.assertFalse(versions.DJANGO_LTE_5_2)
+        self.assertFalse(versions.DJANGO_LTE_6_0)
+        self.assertFalse(versions.DJANGO_LTE_6_1)
+        self.assertTrue(versions.DJANGO_LTE_6_2)
+
+        self.assertTrue(versions.DJANGO_GTE_5_2)
+        self.assertTrue(versions.DJANGO_GTE_6_0)
+        self.assertTrue(versions.DJANGO_GTE_6_1)
+        self.assertTrue(versions.DJANGO_GTE_6_2)
 
 if __name__ == "__main__":
     unittest.main()
