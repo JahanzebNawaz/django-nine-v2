@@ -35,3 +35,4 @@ tmp/
 /src/django_nine.egg-info
 /examples/simple/simple/settings/local_settings.py
 /examples/simple/db.sqlite3
+logs/

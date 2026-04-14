@@ -1,4 +1,9 @@
+import os
+
 from .base import *
+
+LOG_DIR = PROJECT_DIR(os.path.join("..", "..", "logs"))
+os.makedirs(LOG_DIR, exist_ok=True)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -33,7 +38,7 @@ LOGGING = {
         "all_log": {
             "level": "ERROR",
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": PROJECT_DIR("../../../var/logs/all.log"),
+            "filename": os.path.join(LOG_DIR, "all.log"),
             "maxBytes": 1048576,
             "backupCount": 99,
             "formatter": "verbose",
@@ -41,7 +46,7 @@ LOGGING = {
         "django_log": {
             "level": "ERROR",
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": PROJECT_DIR("../../../var/logs/django.log"),
+            "filename": os.path.join(LOG_DIR, "django.log"),
             "maxBytes": 1048576,
             "backupCount": 99,
             "formatter": "verbose",
@@ -49,7 +54,7 @@ LOGGING = {
         "django_request_log": {
             "level": "ERROR",
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": PROJECT_DIR("../../../var/logs/django_request.log"),
+            "filename": os.path.join(LOG_DIR, "django_request.log"),
             "maxBytes": 1048576,
             "backupCount": 99,
             "formatter": "verbose",
@@ -57,7 +62,7 @@ LOGGING = {
         "nine_log": {
             "level": "ERROR",
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": PROJECT_DIR("../../../var/logs/nine.log"),
+            "filename": os.path.join(LOG_DIR, "nine.log"),
             "maxBytes": 1048576,
             "backupCount": 99,
             "formatter": "verbose",
