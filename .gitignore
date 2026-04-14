@@ -33,6 +33,7 @@ tmp/
 /dist/
 /var/
 /src/django_nine.egg-info
+/src/django_nine_v2.egg-info
 /examples/simple/simple/settings/local_settings.py
 /examples/simple/db.sqlite3
 logs/
