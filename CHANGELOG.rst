@@ -15,6 +15,23 @@ are used for versioning (schema follows below):
   0.3.2 to 0.4).
 - All backwards incompatible changes are mentioned in this document.
 
+0.2.8 (django-nine-v2 fork)
+------------------------------
+2026-04-21
+
+**Note: This is a community fork of the original django-nine project.**
+
+- Project forked as `django-nine-v2` to serve as the maintained version.
+- Updated maintainer: Jahanzeb Nawaz <mr.njahanzeb@gmail.com>
+- Preserved original author attribution: Artur Barseghyan
+- Updated Python support: Now requires Python 3.11+ (previously 3.7+)
+- Supported Django versions: 4.0, 4.1, 4.2, 5.0, 5.1, 5.2, 6.0
+- Updated GitHub repository to: github.com/JahanzebNawaz/django-nine-v2
+- Updated documentation URLs and project metadata
+- License remains: GPL-2.0-only OR LGPL-2.1-or-later
+- Added tox environments for building and deploying to PyPI
+- CI/CD pipeline updated for GitHub Actions
+
 0.2.7
 -----
 2022-12-05

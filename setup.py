@@ -6,7 +6,7 @@ try:
 except OSError:
     readme = ""
 
-version = "0.2.7"
+version = "0.2.8"
 
 install_requires = [
     "Django",
