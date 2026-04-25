@@ -18,6 +18,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
 NC='\033[0m' # No Color
 
 # Script directory
@@ -126,7 +127,7 @@ push_git_tag() {
 
 show_help() {
     cat << EOF
-Usage: ./scripts/deploy.sh [COMMAND]
+Usage: ./scripts/deploy.sh [COMMAND] [PYTHON_VERSION]
 
 Commands:
   help      Show this help message
@@ -134,20 +135,35 @@ Commands:
   test      Build and deploy to TestPyPI for testing
   prod      Build and deploy to production PyPI
 
+Arguments:
+  PYTHON_VERSION   Optional: Python version (310, 311, 312, 313, 314)
+                   If specified, activates .venv/PYTHON_VERSION before deploying
+                   If omitted, uses system Python directly
+
 Environment Variables:
   SKIP_TESTS   Set to 1 to skip running tests before build (default: 0)
 
 Examples:
   ./scripts/deploy.sh build
-    Build distribution packages and validate with twine
+    Build packages using system Python and tox
+
+  ./scripts/deploy.sh build 311
+    Build packages using .venv/311 (Python 3.11 virtual environment)
 
   ./scripts/deploy.sh test
-    Build and upload to TestPyPI for testing
+    Build and deploy to TestPyPI using system Python
+
+  ./scripts/deploy.sh test 312
+    Build and deploy to TestPyPI using .venv/312 (Python 3.12)
 
   ./scripts/deploy.sh prod
-    Build and upload to production PyPI, create git tag, and push to GitHub
+    Full deployment to production PyPI with system Python
+
+  ./scripts/deploy.sh prod 311
+    Full deployment to production PyPI using .venv/311
 
 Notes:
+  - If PYTHON_VERSION is specified, that venv must exist (created via ./scripts/test_envs.sh create)
   - Requires .pypirc configured with PyPI tokens
   - Tests run by default; set SKIP_TESTS=1 to skip
   - Production deployment creates git tag and pushes to GitHub
@@ -157,7 +173,20 @@ EOF
 }
 
 check_requirements() {
+    local python_version="$1"
+    
     print_info "Checking requirements..."
+
+    # If Python version specified, check if venv exists
+    if [ -n "$python_version" ]; then
+        local venv_path="$PROJECT_ROOT/.venv/$python_version"
+        if [ ! -d "$venv_path" ]; then
+            print_error "Virtual environment not found: .venv/$python_version"
+            print_info "Create it with: ./scripts/test_envs.sh create $python_version"
+            exit 1
+        fi
+        print_success ".venv/$python_version found"
+    fi
 
     # Check if tox is installed
     if ! command -v tox &> /dev/null; then
@@ -180,6 +209,40 @@ check_requirements() {
         exit 1
     fi
     print_success "setup.py found"
+}
+
+activate_venv() {
+    local python_version="$1"
+    
+    if [ -z "$python_version" ]; then
+        return 0  # No venv to activate
+    fi
+    
+    local venv_path="$PROJECT_ROOT/.venv/$python_version"
+    
+    print_section "Activating .venv/$python_version"
+    
+    if [ ! -d "$venv_path" ]; then
+        print_error "Virtual environment not found: $venv_path"
+        return 1
+    fi
+    
+    # Source the activation script
+    source "$venv_path/bin/activate"
+    
+    # Verify activation
+    if ! python --version 2>&1 | grep -q "^Python"; then
+        print_error "Failed to activate virtual environment"
+        return 1
+    fi
+    
+    local py_version=$(python --version 2>&1)
+    print_success "Activated: $py_version"
+    return 0
+}
+
+print_section() {
+    echo -e "${MAGENTA}>>> $1${NC}"
 }
 
 run_tests() {
@@ -328,6 +391,7 @@ deploy_prod() {
 # Main
 main() {
     local command="${1:-help}"
+    local python_version="${2:-}"
 
     # Display version info at startup (except for help)
     if [ "$command" != "help" ]; then
@@ -336,6 +400,14 @@ main() {
         if [ -n "$version" ]; then
             print_info "django-nine-v2 version: $version"
         fi
+        
+        # Show which environment will be used
+        if [ -n "$python_version" ]; then
+            print_info "Using virtual environment: .venv/$python_version"
+        else
+            print_info "Using system Python"
+        fi
+        echo ""
     fi
 
     case "$command" in
@@ -343,19 +415,28 @@ main() {
             show_help
             ;;
         build)
-            check_requirements
+            check_requirements "$python_version"
+            if [ -n "$python_version" ]; then
+                activate_venv "$python_version" || exit 1
+            fi
             run_tests
             build_packages
             print_success "Build complete! Packages are in dist/"
             ;;
         test)
-            check_requirements
+            check_requirements "$python_version"
+            if [ -n "$python_version" ]; then
+                activate_venv "$python_version" || exit 1
+            fi
             run_tests
             build_packages
             deploy_test
             ;;
         prod)
-            check_requirements
+            check_requirements "$python_version"
+            if [ -n "$python_version" ]; then
+                activate_venv "$python_version" || exit 1
+            fi
             run_tests
             build_packages
             deploy_prod
