@@ -173,7 +173,7 @@ create_venv() {
         
         # Install project and dependencies
         print_info "Installing project, dependencies, and test requirements..."
-        if uv pip install --python "$venv_path" -e "$PROJECT_ROOT" pytest pytest-cov beautifulsoup4 > /dev/null 2>&1; then
+        if uv pip install --python "$venv_path" -e "$PROJECT_ROOT" pytest pytest-cov beautifulsoup4 tox build twine > /dev/null 2>&1; then
             print_success ".venv/$version ready"
             return 0
         else

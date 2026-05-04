@@ -186,14 +186,15 @@ check_requirements() {
             exit 1
         fi
         print_success ".venv/$python_version found"
+        # Skip system tox check - tox will be in the venv
+    else
+        # Only check system tox if no venv specified
+        if ! command -v tox &> /dev/null; then
+            print_error "tox is not installed. Install with: pip install tox"
+            exit 1
+        fi
+        print_success "tox is installed"
     fi
-
-    # Check if tox is installed
-    if ! command -v tox &> /dev/null; then
-        print_error "tox is not installed. Install with: pip install tox"
-        exit 1
-    fi
-    print_success "tox is installed"
 
     # Check if .pypirc exists
     if [ ! -f ~/.pypirc ]; then
@@ -300,6 +301,19 @@ deploy_test() {
         build_packages
     fi
 
+    # Final approval before upload
+    echo ""
+    print_warning "Ready to upload to TestPyPI"
+    print_info "Packages to upload:"
+    ls -lh dist/
+    echo ""
+    read -p "Do you want to proceed with uploading to TestPyPI? (yes/no): " approval
+    
+    if [ "$approval" != "yes" ]; then
+        print_info "Upload cancelled"
+        return 0
+    fi
+
     print_info "Running: tox -e deploy-test"
     tox -e deploy-test || {
         print_error "TestPyPI deployment failed"
@@ -362,6 +376,21 @@ deploy_prod() {
     # Step 3: Deploy to PyPI
     print_header "Step 3: Deploying to Production PyPI"
     cd "$PROJECT_ROOT"
+    
+    # Final approval before production upload
+    echo ""
+    print_warning "FINAL APPROVAL REQUIRED: Ready to upload to Production PyPI"
+    print_info "Version: $version"
+    print_info "Packages to upload:"
+    ls -lh dist/
+    echo ""
+    read -p "Do you want to proceed with uploading to PRODUCTION PyPI? (yes/no): " prod_approval
+    
+    if [ "$prod_approval" != "yes" ]; then
+        print_info "Upload cancelled"
+        print_warning "Git tag created locally but NOT pushed. To clean up, run: git tag -d v$version"
+        return 0
+    fi
     
     print_info "Running: tox -e deploy"
     tox -e deploy || {
