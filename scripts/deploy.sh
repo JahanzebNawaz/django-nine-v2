@@ -346,13 +346,6 @@ deploy_prod() {
         exit 1
     fi
 
-    read -p "Are you sure you want to continue? (yes/no): " confirm
-
-    if [ "$confirm" != "yes" ]; then
-        print_info "Deployment cancelled"
-        exit 0
-    fi
-
     # Step 1: Create git tag FIRST
     print_header "Step 1: Creating Git Tag"
     if ! create_git_tag "$version"; then

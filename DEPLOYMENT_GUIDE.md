@@ -258,15 +258,8 @@ python -c "import django_nine; print(django_nine.__version__)"
 ./scripts/deploy.sh prod 312
 ```
 
-**Interactive prompts:**
+**Interactive prompt - Single Confirmation:**
 
-1. Initial confirmation:
-```
-⚠ This will create a git tag, build, upload to PyPI, and push to GitHub!
-Are you sure you want to continue? (yes/no): yes
-```
-
-2. Final approval before upload:
 ```
 ⚠ FINAL APPROVAL REQUIRED: Ready to upload to Production PyPI
 ℹ Version: 0.2.9
